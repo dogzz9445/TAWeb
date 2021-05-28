@@ -1,5 +1,5 @@
-from backend.common.views.apis.base import RestViewSet
-from backend.common.views.apis.analyzed import AnalyzedRestViewSet
+from common.api.views.base import RestViewSet
+from common.api.views.analyzed import AnalyzedRestViewSet
 
 routes = [
     {'regex': r'rest', 'viewset': RestViewSet, 'basename': 'Rest'},

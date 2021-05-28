@@ -12,7 +12,7 @@ class Analyzed(models.Model):
     json_result = models.JSONField(db_index=True)
 
     class Meta:
-        abstract = True
+        get_latest_by = 'id'
 
 
 class AnalyzedBaseSerializer(serializers.ModelSerializer):

@@ -5,7 +5,7 @@ from django.contrib import admin
 import django_js_reverse.views
 from rest_framework.routers import DefaultRouter
 
-from backend.common.routes import routes as common_routes
+from common.routes import routes as common_routes
 
 router = DefaultRouter()
 

@@ -3,11 +3,9 @@ from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework.permissions import AllowAny
 
-from backend.common.models.analyzed import Analyzed, AnalyzedBaseSerializer
+from common.api.models.analyzed import Analyzed, AnalyzedBaseSerializer
 
 class AnalyzedRestViewSet(viewsets.ModelViewSet):
-    queryset = Analyzed.objects.all()
-
     @action(
         detail=False,
         methods=['get'],
@@ -15,7 +13,7 @@ class AnalyzedRestViewSet(viewsets.ModelViewSet):
         url_path='recent',
     )
     def recent(self, request):
-        queryset = self.queryset.latest()
+        queryset = Analyzed.objects.all().latest()
         serializer = AnalyzedBaseSerializer(queryset)
         return Response(
             serializer.data,
@@ -30,10 +28,10 @@ class AnalyzedRestViewSet(viewsets.ModelViewSet):
     )
     def target(self, request, target_date=None):
         if target_date == None:
-            queryset = self.queryset.latest()
+            queryset = Analyzed.objects.all().latest()
         else:
             # FIXME: to test
-            queryset = self.queryset.filter(target_date=target_date).latest()
+            queryset = Analyzed.objects.all().filter(target_date=target_date).latest()
         serializer = AnalyzedBaseSerializer(queryset)
         return Response(
             serializer.data,
@@ -47,7 +45,7 @@ class AnalyzedRestViewSet(viewsets.ModelViewSet):
         url_path='version',
     )
     def version(self, request, target_date=None, version=None):
-        queryset = self.queryset.filter(target_date=target_date, version=version).latest()
+        queryset = Analyzed.objects.all().filter(target_date=target_date, version=version).latest()
         serializer = AnalyzedBaseSerializer(queryset)
         return Response(
             serializer.data,
