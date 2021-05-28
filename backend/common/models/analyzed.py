@@ -1,8 +1,7 @@
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
-from model_utils.fields import AutoCreatedField, AutoLastModifiedField
-
+from rest_framework import serializers
 
 class Analyzed(models.Model):
     version = models.IntegerField(db_index=True)
@@ -14,3 +13,24 @@ class Analyzed(models.Model):
 
     class Meta:
         abstract = True
+
+
+class AnalyzedBaseSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Analyzed
+        fields = (
+            'version',
+            'analyze_period',
+            'target_start_date',
+            'target_end_date'
+            'target_date'
+            'json_result',
+        )
+        # read_only_fields = (
+        #     'version',
+        #     'analyze_period',
+        #     'target_start_date',
+        #     'target_end_date'
+        #     'target_date'
+        #     'json_result',
+        # )
