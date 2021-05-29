@@ -8,6 +8,7 @@
 __pycache__/
 /.vscode/
 .pytest_cache
+secret.py
 
 # coverage result
 .coverage
