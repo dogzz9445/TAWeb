@@ -19,12 +19,12 @@ class AnalyzedBaseSerializer(serializers.ModelSerializer):
     class Meta:
         model = Analyzed
         fields = (
-            'version',
-            'analyze_period',
-            'target_start_date',
-            'target_end_date'
-            'target_date'
-            'json_result',
+            "version",
+            "analyze_period",
+            "target_start_date",
+            "target_end_date",
+            "target_date",
+            "json_result",
         )
         # read_only_fields = (
         #     'version',
