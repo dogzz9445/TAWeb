@@ -1,5 +1,5 @@
 from .base import *  # noqa
-
+from .secret import *
 
 DEBUG = True
 
@@ -8,6 +8,14 @@ HOST = "http://localhost:8000"
 SECRET_KEY = "secret"
 
 DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'postgres',
+        'USER': 'postgres',
+        'PASSWORD': DB_POSTGRES_PASSWORD,
+        'HOST': 'database-tft.ce5q9qmucrjo.ap-northeast-2.rds.amazonaws.com',
+        'PORT': '5432',
+    }
     #"default": {"ENGINE": "django.db.backends.sqlite3", "NAME": base_dir_join("db.sqlite3"),}
 }
 
