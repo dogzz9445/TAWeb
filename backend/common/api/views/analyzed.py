@@ -5,6 +5,8 @@ from rest_framework.permissions import AllowAny
 
 from common.api.models.analyzed import Analyzed, AnalyzedBaseSerializer
 
+from datetime import datetime
+
 class AnalyzedRestViewSet(viewsets.ModelViewSet):
     @action(
         detail=False,
@@ -24,12 +26,13 @@ class AnalyzedRestViewSet(viewsets.ModelViewSet):
         detail=False,
         methods=['get'],
         permission_classes=[AllowAny],
-        url_path='target',
+        url_path='target/(?P<target_date>\d+)',
     )
     def target(self, request, target_date=None):
         if target_date == None:
             queryset = Analyzed.objects.all().latest()
         else:
+            target_date = datetime.strptime(target_date, "%y%m%d")
             # FIXME: to test
             queryset = Analyzed.objects.all().filter(target_date=target_date).latest()
         serializer = AnalyzedBaseSerializer(queryset)
@@ -42,9 +45,10 @@ class AnalyzedRestViewSet(viewsets.ModelViewSet):
         detail=False,
         methods=['get'],
         permission_classes=[AllowAny],
-        url_path='version',
+        url_path='version/(?P<target_date>\d+)',
     )
     def version(self, request, target_date=None, version=None):
+        target_date = datetime.strptime(target_date, "%y%m%d")
         queryset = Analyzed.objects.all().filter(target_date=target_date, version=version).latest()
         serializer = AnalyzedBaseSerializer(queryset)
         return Response(
