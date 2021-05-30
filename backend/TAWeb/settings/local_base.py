@@ -5,7 +5,7 @@ DEBUG = True
 
 HOST = "http://localhost:8000"
 
-SECRET_KEY = "secret"
+SECRET_KEY = TAWEB_SECRET_KEY
 
 DATABASES = {
     'default': {

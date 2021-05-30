@@ -5,6 +5,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import DjangoImgSrc from '../../assets/images/django-logo-negative.png';
 import { creators } from '../store/rest_check';
 
+import AppLayout from "../app/example-app/components/AppLayout";
+
 const Home = () => {
   const dispatch = useDispatch();
   const restCheck = useSelector((state) => state.restCheck);
@@ -32,6 +34,7 @@ const Home = () => {
       <Button variant="outline-dark" onClick={() => setShowBugComponent(true)}>
         Click to test if Sentry is capturing frontend errors! (Should only work in Production)
       </Button>
+      <AppLayout/>
       {showBugComponent && showBugComponent.field.notexist}
     </>
   );
