@@ -14,7 +14,7 @@ def base_dir_join(*args):
 
 SITE_ID = 1
 
-DEBUG = True
+DEBUG = False
 
 ADMINS = (("Admin", "dongmin.jang.kr@gmail.com"),)
 

@@ -45,7 +45,7 @@ class AnalyzedRestViewSet(viewsets.ModelViewSet):
         detail=False,
         methods=['get'],
         permission_classes=[AllowAny],
-        url_path='version/(?P<target_date>\d+)',
+        url_path='version/(?P<target_date>\d+)/(?P<version>\d+)',
     )
     def version(self, request, target_date=None, version=None):
         target_date = datetime.strptime(target_date, "%y%m%d")
@@ -55,31 +55,3 @@ class AnalyzedRestViewSet(viewsets.ModelViewSet):
             serializer.data,
             status=status.HTTP_200_OK,
         )
-
-    @action(
-        detail=False,
-        methods=['get'],
-        permission_classes=[AllowAny],
-        url_path='rest_check',
-    )
-    def rest_check(self, request):
-        # AnalyzedSerializer
-        {"result": self.queryset}
-        result = {"result": self.queryset}
-        return Response(
-            result,
-            status=status.HTTP_200_OK,
-        )
-
-    # examples
-    # https://stackoverflow.com/questions/22194499/django-rest-framework-nested-urls-with-drf-nested-routers
-
-    # def list(self, request, domain_pk=None):
-    #     queryset = self.queryset.filter(domain=domain_pk)
-    #     serializer = NameserverSerializer(queryset, many=True)
-    #     return Response(serializer.data)
-
-    # def retrieve(self, request, pk=None, domain_pk=None):
-    #     queryset = self.queryset.get(pk=pk, domain=domain_pk)
-    #     serializer = NameserverSerializer(queryset)
-    #     return Response(serializer.data)

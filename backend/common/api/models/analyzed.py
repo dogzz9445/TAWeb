@@ -9,7 +9,7 @@ class Analyzed(models.Model):
     target_start_date = models.DateTimeField(db_index=True)
     target_end_date = models.DateTimeField(db_index=True)
     target_date = models.DateTimeField(db_index=True)
-    json_result = models.JSONField(db_index=True)
+    json_result = models.JSONField(db_index=False)
 
     class Meta:
         get_latest_by = 'id'
@@ -26,11 +26,3 @@ class AnalyzedBaseSerializer(serializers.ModelSerializer):
             "target_date",
             "json_result",
         )
-        # read_only_fields = (
-        #     'version',
-        #     'analyze_period',
-        #     'target_start_date',
-        #     'target_end_date'
-        #     'target_date'
-        #     'json_result',
-        # )

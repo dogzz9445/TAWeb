@@ -5,6 +5,8 @@ DEBUG = True
 
 HOST = "http://localhost:8000"
 
+ALLOWED_HOSTS = ['*', ]
+
 SECRET_KEY = TAWEB_SECRET_KEY
 
 DATABASES = {
