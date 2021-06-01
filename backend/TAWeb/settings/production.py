@@ -44,6 +44,18 @@ SECURE_CONTENT_TYPE_NOSNIFF = True
 SECURE_BROWSER_XSS_FILTER = True
 X_FRAME_OPTIONS = "DENY"
 
+# CORS
+CORS_ORIGIN_ALLOW_ALL = False
+CORS_ALLOW_CREDENTIALS = False
+# TODO:
+#   Have to edit whitelist when using difference server
+CORS_ORIGIN_WHITELIST = [
+    "http://localhost:3000",
+]
+CORS_ORIGIN_REGEX_WHITELIST = [
+    "http://localhost:3000"
+]
+
 # Webpack
 WEBPACK_LOADER["DEFAULT"]["CACHE"] = True
 

@@ -3,7 +3,13 @@ from django.utils.translation import ugettext_lazy as _
 
 from rest_framework import serializers
 
+'''
+'''
 class Analyzed(models.Model):
+    # FIXME:
+    # to edit db_index
+    # to increase efficiency
+
     version = models.IntegerField(db_index=True)
     analyze_period = models.IntegerField(db_index=True)
     target_start_date = models.DateTimeField(db_index=True)
@@ -14,7 +20,8 @@ class Analyzed(models.Model):
     class Meta:
         get_latest_by = 'id'
 
-
+'''
+'''
 class AnalyzedBaseSerializer(serializers.ModelSerializer):
     class Meta:
         model = Analyzed
