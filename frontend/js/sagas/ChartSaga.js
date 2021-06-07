@@ -1,26 +1,18 @@
-import axios from "axios";
 import { all, call, fork, put, takeLatest, throttle } from "redux-saga/effects";
-import {
-    LOAD_CHARTDATA_FAILURE,
-    LOAD_CHARTDATA_REQUEST,
-    LOAD_CHARTDATA_SUCCESS,
-} from "../reducers/Chart";
-
-function loadChartDataAPI() {
-    return axios.get(`/api/analyzed/recent/`);
-}
+import api from "../reducers/api";
+import { types as chartType } from "../reducers/apis/chart";
 
 function* loadChartData(action) {
     try {
-        const result = yield call(loadChartDataAPI, action.data);
+        const result = yield call(api.get('/api/analyzed/decks/'), action.data);
 
         yield put({
-            type: LOAD_CHARTDATA_SUCCESS,
+            type: chartType.FETCH_SUCCESS,
             data: result.data,
         });
     } catch (err) {
         yield put({
-            type: LOAD_CHARTDATA_FAILURE,
+            type: chartType.FETCH_ERROR,
             error: err.response.data,
         });
     }
@@ -28,7 +20,7 @@ function* loadChartData(action) {
 
 function* watchLoadChart() {
     /* request time setting */
-    yield throttle(60000, LOAD_CHARTDATA_REQUEST, loadChartData);
+    yield throttle(60000, chartType.FETCH_REQUESTED, loadChartData);
 }
 
 export default function* chartSaga() {
